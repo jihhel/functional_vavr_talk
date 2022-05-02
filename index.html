@@ -1,0 +1,280 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Rendez votre Java fonctionnel avec Vavr.io</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-background-image="https://zupimages.net/up/22/16/x2og.png" data-background-size="100%"></section>
+				<section>
+					<p class="r-fit-text">Comment choisissons-nous nos outils de développement ?</p>
+					<ul>
+						<li class="fragment">Ceux qui permettent de réaliser le projet</li>
+						<li class="fragment">Ceux qui répondent aux contraintes du projet</li>
+						<li class="fragment">Ceux qui<strong> nous facilitent la vie</strong></li> <!--make it bold-->
+					</ul>
+				</section>
+				<section>
+					<h2>Qui suis-je ?</h2>
+					<!--mettre photo-->
+							<p>Développeur Java (et Scala)</p>
+							<p>jonathan.lecointe@link-value.fr</p>
+					</p>
+				</section>
+				<section>
+					<!--changer fond photo-->
+					<p>Une entreprise de conseil et de réalisation IT</p>
+					<p>Implantée à Paris, Lyon et Lille</p>
+				</section>
+				<section>
+					<h2>Sommaire</h2>
+					<p>Au menu aujourd'hui :</p>
+					<ul>
+						<li>Propriétés des programmes fonctionnels purs</li>
+						<li>Comment la librairie Vavr.io permet de l'appliquer</li>
+						<li>Démonstration de son utilité</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Propriétés des programmes fonctionnels (PF)</h2>
+					<!--nuage de mots-->
+
+				</section>
+				<section>
+					<h2>PF : définitions</h2>
+					<p>Les programmes purement fonctionnels sont</p>
+					<ul>
+						<li class="fragment">Déterministes</li>
+						<li class="fragment">Totaux</li>
+						<li class="fragment">Purs</li>
+					</ul>
+					<aside class="notes">
+						On évite les effets de bord
+						On abstrait le flôt de controle
+					</aside>
+				</section>
+				<section>
+					<h2>PF : définitions</h2>
+					<p>Les fonctions sont des citoyens de premier ordre</p>
+					<ul>
+						<li>Une fonction peut être assignée à une variable</li>
+						<li>Une fonction peut retourner une fonction</li>
+						<li>Une fonction peut être passée en paramètre</li>
+					</ul>
+				</section>
+				<section>
+					<h2>PF : définitions</h2>
+					<h3>Immutabilité</h3>
+					<!--change code to java highlighting-->
+					<pre><code data-line-numbers data-trim>
+						Integer nb = 0;
+						processNb(nb);
+
+						System.out.println(nb.toString());
+						// ???
+					</code>
+				</section>
+				<section>
+					<h2>PF: procédural vs déclaratif</h2>
+					<p>Objectif : </p>
+				</section>
+				<section>
+					<h2>PF : composition</h2>
+				</section>
+				<section>
+					<h2>PF : définitions</h2>
+					<h3>Monades</h3>
+					<ul>
+						<li>return :: a -> M a</li>
+						<li>bind :: (M a) -> (a -> Mb) -> (M b)</li>
+					</ul>
+					
+					<pre>
+						<code data-line-numbers data-trim data-noescape>
+							Optional&lt;Integer> maybeNb = Optional.of(1);
+							return maybeNb.map(nb -> nb.toString());
+							// Optional["1"]
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>PF : autres outils</h2>
+					<ul>
+						<li>Programmation par type
+							<ul>
+								<li>Les types sont porteurs d'informations</li>
+								<li>Un type précis impose des contraintes à nos données</li>
+								<li>Un type est validé à la compilation</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section>
+					<h2>PF : autres outils</h2>
+					<ul>
+						<li>L'évaluation paresseuse
+							<ul>
+								<li>Dissocier la déclaration et l'instanciation d'une variable</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section>
+					<h2>PF : superpouvoirs débloqués</h2>
+					<ul>
+						<li>Programmes plus concis et expressifs</li>
+						<li>Se concentrer sur le "quoi" plutôt que le "comment"</li>
+						<li>Comprendre le but d'un algorithme plus facilement</li>
+						<li>Faciliter les tests de son programme</li>
+					</ul>
+					<pre>
+						<code data-line-numbers data-trim data-noescape>
+							List&lt;Integer> addOneToListElements(List&lt;Integer> list) {
+								for (int i; i < list.size(); i++) {
+									list.set(i, list.get(i) + 1);
+								}
+								return list;
+							}
+						</code>
+					</pre>
+					<pre>
+						<code data-line-numbers data-trim data-noescape>
+							List&lt;Integer> addOneToListElements(List&lt;Integer> list) {
+								return list.map(nb -> nb + 1);
+							}
+						</code>
+					</pre>
+				</section>
+				<section data-auto-animate>
+					<img src="https://www.vavr.io/img/vavr-logo.png">
+				</section>
+
+				<section>
+					<h2>Vavr.io : objectifs</h2>
+					<ul>
+						<li>Simplifier l'écriture de programmes fonctionnels en Java</li>
+						<li>Fournit des Collections immutables (Monades)</li>
+						<li>Fournit de nombreuses fonctions utilitaires</li>
+						<li>Fournit des outils et structures de contrôle</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Vavr.io : fonctions communes</h2>
+					<p>`.map` permet de transformer le contenu d'une monade.</p>
+					<p>map :: M a -> (a -> b) -> M b</p>
+					<pre>
+						<code data-line-numbers data-trim data-noescape>
+							List&lt;Integer> addOneToListElements(List&lt;Integer> list) {
+								return list.map(nb -> nb + 1);
+							}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Vavr.io : fonctions communes</h2>
+					<p>`.flatten` permet d'aplatir le contenu d'une monade.</p>
+					<p>flatten :: M (M a) -> M b</p>
+				</section>
+				<section>
+					<h2>Vavr.io : fonctions communes</h2>
+					<p>`.flatMap` permet de transformer le contenu d'une monade.</p>
+					<p>Equivalent à `.map().flatten()`</p>
+					<p>flatMap :: M a -> (a -> M b) -> M b</p>
+					<pre>
+						<code data-line-numbers data-trim data-noescape>
+							List&lt;Integer> reiterateListElements(List&lt;Integer> list) {
+								return list.flatMap(nb -> List.of(nb, nb));
+							}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Vavr.io : fonctions communes</h2>
+					<p>`.filter` permet de retirer des éléments d'une monade.</p>
+					<pre>
+						<code data-line-numbers data-trim data-noescape>
+							List&lt;Integer> getEvenNumbersFrom(List&lt;Integer> list) {
+								return list.filter(nb -> nb % 0 == 0);
+							}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Vavr.io : quelques monades</h2>
+					<p>Option&lt;T></p>
+					<ul>
+						<li>Deux valeurs possibles : Some(T) et None</li>
+						<li>Permet de signifier la possibilité d'absence de valeur (remplace null).</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Vavr.io : quelques monades</h2>
+					<p>Either&lt;E, T></p>
+					<ul>
+						<li>Deux valeurs possibles : Left(E) et Right(T)</li>
+						<li>Exprime le succès ou l'échec d'une fonction.</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Vavr.io : quelques monades</h2>
+					<p>Try&lt;T></p>
+					<ul>
+						<li>Deux valeurs possibles : Failure(Throwable) et Success(T)</li>
+						<li>Se comporte comme un try, capture les exceptions.</li>
+						<li>Equivalent d'un Either maniant des Throwable</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Vavr.io : quelques monades</h2>
+					<p>Future&lt;T></p>
+					<ul>
+						<li>Représente une valeur qui sera potentiellement disponible dans le futur</li>
+						<li>Equivalent d'un Try asynchrone.</li>
+						<li>Résultat mémoizé : un deuxième appel retourne le résultat du premier</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Let's code !</h2>
+
+				</section>
+				<section>
+					<h2>En conclusion</h2>
+					<ul>
+						<li>La programmation fonctionnelle est un outil pour <b>simplifier la vie des développeurs</b></li>
+						<li>Vavr.io la rend plus simple d'utilisation en Java</li>
+						<li>Moins de bugs, raisonnements plus simples, </li>
+					</ul>
+				</section>
+
+
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				slideNumber: 'c/t',
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
