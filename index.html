@@ -8,15 +8,49 @@
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+		<link rel="stylesheet" href="dist/theme/white.css">
 
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
 	</head>
 	<body>
+		<style type="text/css">
+            #header-left {
+                position: absolute;
+                top: 0%;
+                left: 0%;
+            }
+            #header-right {
+                position: absolute;
+                top: 0%;
+                right: 0%;
+            }
+            #footer-left {
+                position: absolute;
+                bottom: 0%;
+                left: 0%;
+				max-height: 10%;
+				height: auto;
+				margin-bottom: 20x;
+				margin-left: 20px;
+            }
+        </style>
+		<div id="hidden" >
+            <div id="header">
+                <div id="header-left">…</div>
+                <div id="header-right">
+					
+
+				</div>
+                <div id="footer-left">
+					<img src='images/ptc.png' style="margin-right:20px"/>
+					<img src='images/lv.png'/>
+				</div>
+            </div>
+        </div>
 		<div class="reveal">
 			<div class="slides">
-				<section data-background-image="https://zupimages.net/up/22/16/x2og.png" data-background-size="100%"></section>
+				<section data-background-image="images/title.png" data-background-size="100%"></section>
 				<section>
 					<p class="r-fit-text">Comment choisissons-nous nos outils de développement ?</p>
 					<ul>
@@ -37,6 +71,9 @@
 					<p>Une entreprise de conseil et de réalisation IT</p>
 					<p>Implantée à Paris, Lyon et Lille</p>
 				</section>
+				<div class="titleBar">
+
+				</div>
 				<section>
 					<h2>Sommaire</h2>
 					<p>Au menu aujourd'hui :</p>
@@ -76,6 +113,7 @@
 				<section>
 					<h2>PF : définitions</h2>
 					<h3>Immutabilité</h3>
+					<!--https://stackoverflow.com/questions/30861845/how-to-use-two-column-layout-with-reveal-js-->
 					<!--change code to java highlighting-->
 					<pre><code data-line-numbers data-trim>
 						Integer nb = 0;
